@@ -1,10 +1,27 @@
 html
   head
-    title='Índice'
+    title Índice
+    script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+    script(type='text/javascript').
+      $(document).ready(function() {
+        $('#crearEmpresa').click(function() {
+        alert($('#empresa').val());
+        });
+        });
+
   body
+    | Empresa:&nbsp
+    input#empresa(type="text", name="empresa")
+    br
+    br
+    | Alumno:&nbsp
+    input(type="text", name="alumno")
+    | &nbspCalificación:&nbsp
+    input(type="text", name="calificacion")
+
     ul
       li
-        a(href='http://127.0.0.1:3000/crearEmpresa') Crear empresa
+        a#crearEmpresa(href='http://127.0.0.1:3000/crearEmpresa') Crear empresa
       li
         a(href='http://127.0.0.1:3000/listarTodo') Listar todo
       li
