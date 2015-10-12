@@ -5,7 +5,24 @@ html
     ul
       li
         a(href='http://127.0.0.1:3000/crearEmpresa') Crear empresa
+      li
+        a(href='http://127.0.0.1:3000/listarTodo') Listar todo
+      li
+        a(href='http://127.0.0.1:3000/crearCalificacion') Crear calificación
       li Listar calificaciones
-      li Crear calificaciones
-      li Borrar calificaciones
+      li Borrar calificación
       li Ranking empresas
+
+    mensaje!=mensaje
+
+    if(datos)
+      table
+        thead
+          tr
+            th Alumno
+            th Calificación
+        tbody
+          each dato in datos
+            tr
+              td=dato.alumno
+              td=dato.calificacion

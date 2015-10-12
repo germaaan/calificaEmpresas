@@ -12,7 +12,12 @@ var app = express();
 // Página de inicio
 app.get('/', index.index);
 app.get('/index.html', index.index);
+// Página para crear empresa
 app.get('/crearEmpresa',index.crearEmpresa);
+
+app.get('/listarTodo',index.listarTodo);
+
+app.get('/crearCalificacion',index.crearCalificacion);
 
 // Variables de entorno
 app.set('port', process.env.PORT || 3000);
