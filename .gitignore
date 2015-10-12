@@ -1,0 +1,9 @@
+# Directorio instalación módulos
+node_modules
+
+# Archivo de base de datos
+calificaciones
+
+# Logs y copias de seguridad
+*.log
+*~
