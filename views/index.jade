@@ -5,9 +5,9 @@ html
     script(type='text/javascript').
       $(document).ready(function() {
         $('#crearEmpresa').click(function() {
-        $('#crearEmpresa').attr('href', 'http://127.0.0.1:3000/crearEmpresa/'+$('#empresa').val());
+          $('#crearEmpresa').attr('href', 'http://127.0.0.1:3000/crearEmpresa/:'+$('#empresa').val());
         });
-        });
+      });
 
   body
     | Empresa:&nbsp

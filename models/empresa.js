@@ -4,9 +4,9 @@ db = new sqlite3.Database('calificaciones'),
 Empresa = {};
 
 // Creamos la tabla de una empresa
-Empresa.crearEmpresa = function(){
-	db.run('CREATE TABLE IF NOT EXISTS osl (id INTEGER PRIMARY KEY AUTOINCREMENT, alumno TEXT, calificacion INTEGER)');
-	console.log('La tabla de la empresa de prueba ha sido creada.');
+Empresa.crearEmpresa = function(empresa){
+	db.run('CREATE TABLE IF NOT EXISTS '+empresa+' (id INTEGER PRIMARY KEY AUTOINCREMENT, alumno TEXT, calificacion INTEGER)');
+	console.log('La tabla de la empresa '+empresa+' ha sido creada.');
 }
 
 Empresa.crearCalificacion = function(data){

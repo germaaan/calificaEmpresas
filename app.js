@@ -4,15 +4,14 @@ var http = require('http');
 var path = require('path');
 
 // Rutas
-var index = require(__dirname+'/routes/index');
+var index = require(__dirname + '/routes/index');
 
 // Crea aplicación web con Express
 var app = express();
 
 // Página de inicio
 app.get('/', index.index);
-app.get('/index.html', index.index);
-app.get('/crearEmpresa',index.crearEmpresa);
+app.get('/crearEmpresa/:empresa', index.crearEmpresa);
 
 // Variables de entorno
 app.set('port', process.env.PORT || 3000);
@@ -31,6 +30,6 @@ app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Creación del servidor
-http.createServer(app).listen(app.get('port'), app.get('ip'), function(){
+http.createServer(app).listen(app.get('port'), app.get('ip'), function() {
   console.log('Servidor Express escuchando en ' + app.get('ip') + ':' + app.get('port'));
 });
