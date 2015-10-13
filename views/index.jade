@@ -1,23 +1,23 @@
 html
   head
     title Índice
-    script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
     script(type='text/javascript').
       $(document).ready(function() {
         $('#crearEmpresa').click(function() {
-        alert($('#empresa').val());
+        $('#crearEmpresa').attr('href', 'http://127.0.0.1:3000/crearEmpresa/'+$('#empresa').val());
         });
         });
 
   body
     | Empresa:&nbsp
-    input#empresa(type="text", name="empresa")
+    input#empresa(type='text', name='empresa')
     br
     br
     | Alumno:&nbsp
-    input(type="text", name="alumno")
+    input(type='text', name='alumno')
     | &nbspCalificación:&nbsp
-    input(type="text", name="calificacion")
+    input(type='text', name='calificacion')
 
     ul
       li
