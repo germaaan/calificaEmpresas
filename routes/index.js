@@ -6,22 +6,30 @@ exports.index = function(req, res) {
 };
 
 exports.crearEmpresa = function(req, res) {
-  var str = req.params.empresa;
-  str = str.replace(':', '');
-  empresa.crearEmpresa(str.toUpperCase());
-  //comprobar si se ha creado
+  var strEmp = req.params.empresa;
+  strEmp = strEmp.replace(':', '');
+  empresa.crearEmpresa({
+    empresa: strEmp.toUpperCase()
+  });
   res.render('index', {
-    mensaje: 'La empresa ' + str + ' ha sido creada.'
+    mensaje: 'Empresa ' + strEmp + ' creada correctamente.'
   });
 };
 
 exports.crearCalificacion = function(req, res) {
+  var strEmp = req.params.empresa;
+  strEmp = strEmp.replace(':', '');
+  var strAlu = req.params.alumno;
+  strAlu = strAlu.replace(':', '');
+  var strCal = req.params.calificacion;
+  strCal = strCal.replace(':', '');
   empresa.crearCalificacion({
-    alumno: 'German',
-    calificacion: 10
+    empresa: strEmp.toUpperCase(),
+    alumno: strAlu.toUpperCase(),
+    calificacion: strCal.toUpperCase()
   });
   res.render('index', {
-    mensaje: 'La calificación de prueba ha sido insertada.'
+    mensaje: 'Calificación para la empresa ' + strEmp + ' añadida.'
   });
 };
 
