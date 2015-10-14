@@ -1,3 +1,4 @@
+// Dependencias
 var empresa = require('../models/empresa');
 
 //Pagina de inicio
@@ -10,9 +11,10 @@ exports.crearEmpresa = function(req, res) {
   strEmp = strEmp.replace(':', '');
   empresa.crearEmpresa({
     empresa: strEmp.toUpperCase()
-  });
-  res.render('index', {
-    mensaje: 'Empresa ' + strEmp + ' creada correctamente.'
+  }, function(error, data) {
+    res.render('index', {
+      mensaje: data
+    });
   });
 };
 

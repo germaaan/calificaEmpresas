@@ -2,7 +2,7 @@
 node_modules
 
 # Archivo de base de datos
-calificaciones
+calificaciones.db
 
 # Logs y copias de seguridad
 *.log
