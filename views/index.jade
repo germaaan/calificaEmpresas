@@ -1,14 +1,21 @@
 html
   head
     title Calificación de empresas de prácticas
-    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
+    script(src='http://code.jquery.com/jquery-1.11.3.min.js')
     script(type='text/javascript').
       $(document).ready(function() {
         $('#crearEmpresa').click(function() {
           if ($('#empresa').val()){
-            $('#crearEmpresa').attr('href', 'http://127.0.0.1:3000/crearEmpresa/:'+$('#empresa').val());
+            $('#crearEmpresa').attr('href', 'http://127.0.0.1:3000/crearEmpresa/:' + $('#empresa').val());
           } else {
             alert("No se puede crear una empresa sin introducir su nombre.");
+          }
+        });
+        $('#crearCalificacion').click(function() {
+          if ($('#empresa').val() && $('#alumno').val() && $('#calificacion').val()){
+            $('#crearCalificacion').attr('href', 'http://127.0.0.1:3000/crearCalificacion/:' + $('#empresa').val() + '/:' + $('#alumno').val() + '/:' + $('#calificacion').val());
+          } else {
+            alert("No se puede crear una calificación sin introducir el nombre de la empresa, el nombre del alumno y el valor de la calificación.");
           }
         });
       });
@@ -19,9 +26,9 @@ html
     br
     br
     | Alumno:&nbsp
-    input(type='text', name='alumno')
+    input#alumno(type='text', name='alumno')
     | &nbspCalificación:&nbsp
-    input(type='text', name='calificacion')
+    input#calificacion(type='text', name='calificacion')
 
     ul
       li
@@ -29,7 +36,7 @@ html
       li
         a(href='http://127.0.0.1:3000/listarTodo') Listar todo
       li
-        a(href='http://127.0.0.1:3000/crearCalificacion') Crear calificación
+        a#crearCalificacion(href='http://127.0.0.1:3000/crearCalificacion') Crear calificación
       li Listar calificaciones
       li Borrar calificación
       li Ranking empresas

@@ -23,13 +23,15 @@ exports.crearCalificacion = function(req, res) {
   strAlu = strAlu.replace(':', '');
   var strCal = req.params.calificacion;
   strCal = strCal.replace(':', '');
+
   empresa.crearCalificacion({
     empresa: strEmp.toUpperCase(),
     alumno: strAlu.toUpperCase(),
     calificacion: strCal.toUpperCase()
-  });
-  res.render('index', {
-    mensaje: 'Calificación para la empresa ' + strEmp + ' añadida.'
+  }, function(error, data) {
+    res.render('index', {
+      mensaje: data
+    });
   });
 };
 
