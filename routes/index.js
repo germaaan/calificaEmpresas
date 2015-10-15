@@ -58,6 +58,18 @@ exports.borrarCalificacion = function(req, res) {
   });
 };
 
+exports.actualizarCalificacion = function(req, res) {
+  empresa.actualizarCalificacion({
+    empresa: procesaNombre(req.params.empresa),
+    alumno: procesaNombre(req.params.alumno),
+    calificacion: procesaNombre(req.params.calificacion)
+  }, function(error, data) {
+    res.render('index', {
+      mensaje: data
+    });
+  });
+};
+
 exports.listarTodo = function(req, res) {
   empresa.listarTodo(function(error, data) {
     res.render('index', {

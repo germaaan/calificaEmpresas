@@ -139,6 +139,37 @@ Empresa.borrarCalificacion = function(data, cb) {
   });
 }
 
+Empresa.actualizarCalificacion = function(data, cb) {
+  Empresa.existeEmpresa(data, function(error, data2) {
+    if (data2 == true) {
+      Empresa.existeAlumno(data, function(error, data3) {
+        if (data3 == false) {
+          var msg = 'No se ha podido actualizar la calificación. No existe una calificación para la empresa ' + data.empresa +
+          ' del alumno ' + data.alumno + ' en la base de datos.';
+          console.log(msg);
+          cb(null, msg);
+        } else {
+          var stmt = db.prepare('UPDATE ' + data.empresa + ' SET calificacion = ? WHERE alumno = ?');
+          stmt.bind(data.calificacion, data.alumno);
+          stmt.get(function(error, row) {
+            if (error) {
+              throw err;
+            } else {
+              var msg = 'Calificación del alumno ' + data.alumno + ' para la empresa ' + data.empresa + ' actualizada.';
+              console.log(msg);
+              cb(null, msg);
+            }
+          });
+        }
+      });
+    } else {
+      var msg = 'No se ha podido actualizar la calificación. La empresa ' + data.empresa + ' no se encuentra en la base de datos.';
+      console.log(msg);
+      cb(null, msg);
+    }
+  });
+}
+
 Empresa.obtenerTablas = function() {
   db.all('SELECT name FROM sqlite_master WHERE type = "table" AND name != "sqlite_sequence"', function(err, rows) {
     if (err) {
