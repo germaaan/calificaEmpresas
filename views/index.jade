@@ -25,6 +25,13 @@ html
             alert("No se puede crear una calificación sin introducir el nombre de la empresa, el nombre del alumno y el valor de la calificación.");
           }
         });
+        $('#borrarCalificacion').click(function() {
+          if ($('#empresa').val() && $('#alumno').val()){
+            $('#borrarCalificacion').attr('href', 'http://127.0.0.1:3000/borrarCalificacion/:' + $('#empresa').val() + '/:' + $('#alumno').val());
+          } else {
+            alert("No se puede borrar una calificación sin introducir el nombre de la empresa y el nombre del alumno.");
+          }
+        });
       });
 
   body
@@ -44,7 +51,8 @@ html
         a#listarCalificaciones(href='http://127.0.0.1:3000/listarCalificaciones') Listar calificaciones
       li
         a#crearCalificacion(href='http://127.0.0.1:3000/crearCalificacion') Crear calificación
-      li Borrar calificación
+      li
+        a#borrarCalificacion(href='http://127.0.0.1:3000/borrarCalificacion') Borrar calificación
       li Ranking empresas
 
     mensaje!=mensaje

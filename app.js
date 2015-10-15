@@ -12,8 +12,9 @@ var app = express();
 // Funcionalidades
 app.get('/', index.index);
 app.get('/crearEmpresa/:empresa', index.crearEmpresa);
-app.get('/crearCalificacion/:empresa/:alumno/:calificacion', index.crearCalificacion);
 app.get('/listarCalificaciones/:empresa', index.listarCalificaciones)
+app.get('/crearCalificacion/:empresa/:alumno/:calificacion', index.crearCalificacion);
+app.get('/borrarCalificacion/:empresa/:alumno', index.borrarCalificacion);
 
 // Variables de entorno
 app.set('port', process.env.PORT || 3000);

@@ -82,7 +82,8 @@ Empresa.crearCalificacion = function(data, cb) {
     if (data2 == true) {
       Empresa.existeAlumno(data, function(error, data3) {
         if (data3 == true) {
-          var msg = 'No se ha podido añadir la calificación. Ya existe una calificación para la empresa ' + data.empresa + ' del alumno ' + data.alumno + '.';
+          var msg = 'No se ha podido añadir la calificación. Ya existe una calificación para la empresa ' + data.empresa +
+          ' del alumno ' + data.alumno + '.';
           console.log(msg);
           cb(null, msg);
         } else {
@@ -101,6 +102,37 @@ Empresa.crearCalificacion = function(data, cb) {
       });
     } else {
       var msg = 'No se ha podido añadir la calificación. La empresa ' + data.empresa + ' no se encuentra en la base de datos.';
+      console.log(msg);
+      cb(null, msg);
+    }
+  });
+}
+
+Empresa.borrarCalificacion = function(data, cb) {
+  Empresa.existeEmpresa(data, function(error, data2) {
+    if (data2 == true) {
+      Empresa.existeAlumno(data, function(error, data3) {
+        if (data3 == false) {
+          var msg = 'No se ha podido borrar la calificación. No existe una calificación para la empresa ' + data.empresa +
+          ' del alumno ' + data.alumno + ' en la base de datos.';
+          console.log(msg);
+          cb(null, msg);
+        } else {
+          var stmt = db.prepare('DELETE FROM ' + data.empresa + ' WHERE alumno = ?');
+          stmt.bind(data.alumno);
+          stmt.get(function(error, row) {
+            if (error) {
+              throw err;
+            } else {
+              var msg = 'Calificación del alumno ' + data.alumno + ' para la empresa ' + data.empresa + ' borrada.';
+              console.log(msg);
+              cb(null, msg);
+            }
+          });
+        }
+      });
+    } else {
+      var msg = 'No se ha podido borrar la calificación. La empresa ' + data.empresa + ' no se encuentra en la base de datos.';
       console.log(msg);
       cb(null, msg);
     }

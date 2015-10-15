@@ -22,6 +22,19 @@ exports.crearEmpresa = function(req, res) {
   });
 };
 
+exports.listarCalificaciones = function(req, res) {
+  var nombreEmpresa = procesaNombre(req.params.empresa);
+
+  empresa.listarCalificaciones({
+    empresa: nombreEmpresa
+  }, function(error, data) {
+    res.render('index', {
+      empresa: nombreEmpresa,
+      datos: data
+    });
+  });
+};
+
 exports.crearCalificacion = function(req, res) {
   empresa.crearCalificacion({
     empresa: procesaNombre(req.params.empresa),
@@ -34,15 +47,13 @@ exports.crearCalificacion = function(req, res) {
   });
 };
 
-exports.listarCalificaciones = function(req, res) {
-  var nombreEmpresa = procesaNombre(req.params.empresa);
-
-  empresa.listarCalificaciones({
-    empresa: nombreEmpresa
+exports.borrarCalificacion = function(req, res) {
+  empresa.borrarCalificacion({
+    empresa: procesaNombre(req.params.empresa),
+    alumno: procesaNombre(req.params.alumno)
   }, function(error, data) {
     res.render('index', {
-      empresa: nombreEmpresa,
-      datos: data
+      mensaje: data
     });
   });
 };
