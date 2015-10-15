@@ -11,6 +11,13 @@ html
             alert("No se puede crear una empresa sin introducir su nombre.");
           }
         });
+        $('#listarCalificaciones').click(function() {
+          if ($('#empresa').val()){
+            $('#listarCalificaciones').attr('href', 'http://127.0.0.1:3000/listarCalificaciones/:' + $('#empresa').val());
+          } else {
+            alert("No se pueden listar las calificaciones de una empresa sin introducir su nombre.");
+          }
+        });
         $('#crearCalificacion').click(function() {
           if ($('#empresa').val() && $('#alumno').val() && $('#calificacion').val()){
             $('#crearCalificacion').attr('href', 'http://127.0.0.1:3000/crearCalificacion/:' + $('#empresa').val() + '/:' + $('#alumno').val() + '/:' + $('#calificacion').val());
@@ -34,16 +41,18 @@ html
       li
         a#crearEmpresa(href='http://127.0.0.1:3000/crearEmpresa') Crear empresa
       li
-        a(href='http://127.0.0.1:3000/listarTodo') Listar todo
+        a#listarCalificaciones(href='http://127.0.0.1:3000/listarCalificaciones') Listar calificaciones
       li
         a#crearCalificacion(href='http://127.0.0.1:3000/crearCalificacion') Crear calificación
-      li Listar calificaciones
       li Borrar calificación
       li Ranking empresas
 
     mensaje!=mensaje
 
     if(datos)
+      strong Empresa:
+      p=empresa
+
       table
         thead
           tr

@@ -52,7 +52,25 @@ Empresa.crearEmpresa = function(data, cb) {
         }
       });
     } else {
-      var msg = 'Ya existe la empresa ' + data.empresa + '.';
+      var msg = 'No se ha creado la empresa. Ya existe una empresa con el nombre ' + data.empresa + ' en la base de datos.';
+      console.log(msg);
+      cb(null, msg);
+    }
+  });
+}
+
+Empresa.listarCalificaciones = function(data, cb) {
+  Empresa.existeEmpresa(data, function(error, data2) {
+    if (data2 == true) {
+      db.all("SELECT alumno,calificacion FROM " + data.empresa, function(err, rows) {
+        if (err) {
+          throw err;
+        } else {
+          cb(null, rows);
+        }
+      });
+    } else {
+      var msg = 'No se han podido listar las calificaciones. La empresa ' + data.empresa + ' no se encuentra en la base de datos.';
       console.log(msg);
       cb(null, msg);
     }
@@ -64,7 +82,7 @@ Empresa.crearCalificacion = function(data, cb) {
     if (data2 == true) {
       Empresa.existeAlumno(data, function(error, data3) {
         if (data3 == true) {
-          var msg = 'Ya existe una calificación para la empresa ' + data.empresa + ' del alumno ' + data.alumno + '.';
+          var msg = 'No se ha podido añadir la calificación. Ya existe una calificación para la empresa ' + data.empresa + ' del alumno ' + data.alumno + '.';
           console.log(msg);
           cb(null, msg);
         } else {
@@ -74,7 +92,7 @@ Empresa.crearCalificacion = function(data, cb) {
             if (error) {
               throw err;
             } else {
-              var msg = 'Calificación para la empresa ' + data.empresa + ' añadida.';
+              var msg = 'Calificación del alumno ' + data.alumno + ' para la empresa ' + data.empresa + ' añadida.';
               console.log(msg);
               cb(null, msg);
             }
@@ -82,7 +100,7 @@ Empresa.crearCalificacion = function(data, cb) {
         }
       });
     } else {
-      var msg = 'No se puede calificar una empresa que no ha sido creada.' + data.empresa + '.';
+      var msg = 'No se ha podido añadir la calificación. La empresa ' + data.empresa + ' no se encuentra en la base de datos.';
       console.log(msg);
       cb(null, msg);
     }
@@ -95,16 +113,6 @@ Empresa.obtenerTablas = function() {
       throw err;
     } else {
       console.log(rows);
-    }
-  });
-}
-
-Empresa.listarTodo = function(cb) {
-  db.all("SELECT * FROM OSL", function(err, rows) {
-    if (err) {
-      throw err;
-    } else {
-      cb(null, rows);
     }
   });
 }

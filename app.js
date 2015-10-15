@@ -13,7 +13,7 @@ var app = express();
 app.get('/', index.index);
 app.get('/crearEmpresa/:empresa', index.crearEmpresa);
 app.get('/crearCalificacion/:empresa/:alumno/:calificacion', index.crearCalificacion);
-app.get('/listarTodo', index.listarTodo)
+app.get('/listarCalificaciones/:empresa', index.listarCalificaciones)
 
 // Variables de entorno
 app.set('port', process.env.PORT || 3000);

@@ -1,16 +1,20 @@
 // Dependencias
 var empresa = require('../models/empresa');
 
+procesaNombre = function(cadena) {
+  cadena = cadena.replace(':', '');
+  cadena = cadena.toUpperCase();
+  return cadena;
+}
+
 //Pagina de inicio
 exports.index = function(req, res) {
   res.render('index', {});
 };
 
 exports.crearEmpresa = function(req, res) {
-  var strEmp = req.params.empresa;
-  strEmp = strEmp.replace(':', '');
   empresa.crearEmpresa({
-    empresa: strEmp.toUpperCase()
+    empresa: procesaNombre(req.params.empresa)
   }, function(error, data) {
     res.render('index', {
       mensaje: data
@@ -19,20 +23,26 @@ exports.crearEmpresa = function(req, res) {
 };
 
 exports.crearCalificacion = function(req, res) {
-  var strEmp = req.params.empresa;
-  strEmp = strEmp.replace(':', '');
-  var strAlu = req.params.alumno;
-  strAlu = strAlu.replace(':', '');
-  var strCal = req.params.calificacion;
-  strCal = strCal.replace(':', '');
-
   empresa.crearCalificacion({
-    empresa: strEmp.toUpperCase(),
-    alumno: strAlu.toUpperCase(),
-    calificacion: strCal.toUpperCase()
+    empresa: procesaNombre(req.params.empresa),
+    alumno: procesaNombre(req.params.alumno),
+    calificacion: procesaNombre(req.params.calificacion)
   }, function(error, data) {
     res.render('index', {
       mensaje: data
+    });
+  });
+};
+
+exports.listarCalificaciones = function(req, res) {
+  var nombreEmpresa = procesaNombre(req.params.empresa);
+
+  empresa.listarCalificaciones({
+    empresa: nombreEmpresa
+  }, function(error, data) {
+    res.render('index', {
+      empresa: nombreEmpresa,
+      datos: data
     });
   });
 };
