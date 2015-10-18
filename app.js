@@ -16,6 +16,7 @@ app.get('/listarCalificaciones/:empresa', index.listarCalificaciones)
 app.get('/crearCalificacion/:empresa/:alumno/:calificacion', index.crearCalificacion);
 app.get('/borrarCalificacion/:empresa/:alumno', index.borrarCalificacion);
 app.get('/actualizarCalificacion/:empresa/:alumno/:calificacion', index.actualizarCalificacion);
+app.get('/generarRanking', index.generarRanking);
 
 // Variables de entorno
 app.set('port', process.env.PORT || 3000);

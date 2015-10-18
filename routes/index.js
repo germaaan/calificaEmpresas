@@ -1,7 +1,7 @@
 // Dependencias
 var empresa = require('../models/empresa');
 
-procesaNombre = function(cadena) {
+var procesaNombre = function(cadena) {
   cadena = cadena.replace(':', '');
   cadena = cadena.toUpperCase();
   return cadena;
@@ -30,7 +30,7 @@ exports.listarCalificaciones = function(req, res) {
   }, function(error, data) {
     res.render('index', {
       empresa: nombreEmpresa,
-      datos: data
+      lista: data
     });
   });
 };
@@ -70,10 +70,10 @@ exports.actualizarCalificacion = function(req, res) {
   });
 };
 
-exports.listarTodo = function(req, res) {
-  empresa.listarTodo(function(error, data) {
+exports.generarRanking = function(req, res) {
+  empresa.generarRanking(function(error, data) {
     res.render('index', {
-      datos: data
+      ranking: data
     });
   });
 };

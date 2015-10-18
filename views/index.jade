@@ -62,11 +62,12 @@ html
         a#borrarCalificacion(href='http://127.0.0.1:3000/borrarCalificacion') Borrar calificación
       li
         a#actualizarCalificacion(href='http://127.0.0.1:3000/actualizarCalificacion') Actualizar calificación
-      li Ranking empresas
+      li
+        a#generarRanking(href='http://127.0.0.1:3000/generarRanking') Generar ranking
 
     mensaje!=mensaje
 
-    if(datos)
+    if(lista)
       strong Empresa:
       p=empresa
 
@@ -76,7 +77,23 @@ html
             th Alumno
             th Calificación
         tbody
-          each dato in datos
+          each dato in lista
             tr
               td=dato.alumno
               td=dato.calificacion
+
+    if(ranking)
+      strong Ranking de empresas:
+
+      table
+        thead
+          tr
+            th Empresa
+            th Nº calificaciones
+            th Calificación promedia
+        tbody
+          each dato in ranking
+            tr
+              td=dato.empresa
+              td=dato.numCalificaciones
+              td=dato.calificacionProm
