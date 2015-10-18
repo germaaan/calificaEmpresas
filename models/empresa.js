@@ -19,16 +19,19 @@
 	along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-// Dependencias de la librería
+// Dependencias de la librería:
+// "sqlite3" para gestionar la base de datos
 var sqlite3 = require('sqlite3').verbose();
+// "underscore" para tratar con las propiedades de los objetos
 var _ = require("underscore");
+// "bluebird" para manipular el comportamiento asíncrono de las conexiones a la base de datos mediante promesas
 var Promise = require("bluebird");
 
 // Crear la base de datos 'calificaciones' y el objeto 'Empresa' sobre el que acceder a las funcionalidades
 var db = new sqlite3.Database('calificaciones.db');
 var Empresa = {};
 
-// Método para comprobar si una empresa existe en la base de datos a partir de su nombre
+// Método para comprobar si una empresa existe en la base de datos a partir de su nombre.
 var existeEmpresa = function(data, res) {
   var stmt = db.prepare('SELECT name FROM sqlite_master WHERE type = "table" AND name = ?');
   stmt.bind(data.empresa);
@@ -76,6 +79,7 @@ var obtenerEmpresas = function(res) {
 
 // Método para obtener el número de calificaciones y la calificación promedia de una empresa
 var obtenerDatosRanking = function(empresa) {
+  // Devuelve una promesa con la información sobre la empresa
   return new Promise(function(resolve, reject) {
     db.all('SELECT COUNT(id) AS numCalificaciones, AVG(calificacion) AS calificacionProm FROM ' + empresa,
       function(err, row) {
@@ -238,6 +242,7 @@ Empresa.generarRanking = function(res) {
       empresas.push(obtenerDatosRanking(valor.name));
     });
 
+    // Pedimos una promesa para obtener información por cada una de las empresas
     Promise.all(empresas).then(function(results) {
       _.each(results, function(valor) {
         var calificacionProm = valor[0].calificacionProm;
@@ -254,6 +259,7 @@ Empresa.generarRanking = function(res) {
         ranking.push(datosEmpresa);
       });
 
+      // Ordenamos el ranking según la calficación promedia y le damos la vuelta para que quede ordenado de forma descendente
       ranking = _.sortBy(ranking, "calificacionProm").reverse();
       res(null, ranking);
     });

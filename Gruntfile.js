@@ -4,15 +4,15 @@ module.exports = function(grunt) {
 
   // Configuración del proyecto
   grunt.initConfig({
-  pkg: grunt.file.readJSON('package.json'),
-  docco: {
-	  debug: {
-	  src: ['*.js','models/*.js'],
-	  options: {
-		  output: 'docs/'
-	  }
-	  }
-  }
+    pkg: grunt.file.readJSON('package.json'),
+    docco: {
+      debug: {
+        src: ['*.js', 'models/*.js'],
+        options: {
+          output: 'docs/'
+        }
+      }
+    }
   });
 
   // Carga el plugin de grunt para hacer esto
