@@ -13,15 +13,18 @@
     "type": "git",
     "url": "git://github.com/germaaan/calificaEmpresas.git"
   },
-  "license": "GNU General Public License v3.0",
+  "license": "GPL-3.0",
   "homepage": "https://github.com/germaaan/clases-CC-2015-16/tree/master/ejercicios/germaaan/tema_01/",
   "main": "app.js",
   "os": [
     "linux"
   ],
-  "private": true,
+  "private": false,
   "directories": {
     "test": "test"
+  },
+  "scripts": {
+  "test": ""
   },
   "dependencies": {
     "bluebird": "^2.10.2",
