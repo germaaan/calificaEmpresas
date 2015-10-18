@@ -19,7 +19,7 @@
 	along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-// Dependencias
+// Dependencias de la librería
 var sqlite3 = require('sqlite3').verbose();
 var _ = require("underscore");
 var Promise = require("bluebird");
@@ -28,6 +28,7 @@ var Promise = require("bluebird");
 var db = new sqlite3.Database('calificaciones.db');
 var Empresa = {};
 
+// Método para comprobar si una empresa existe en la base de datos a partir de su nombre
 var existeEmpresa = function(data, res) {
   var stmt = db.prepare('SELECT name FROM sqlite_master WHERE type = "table" AND name = ?');
   stmt.bind(data.empresa);
@@ -44,6 +45,7 @@ var existeEmpresa = function(data, res) {
   });
 }
 
+// Método para comprobar si un alumno existe en la base de datos a partir de su nombre
 var existeAlumno = function(data, res) {
   var stmt = db.prepare('SELECT alumno FROM ' + data.empresa + ' WHERE alumno = ?');
   stmt.bind(data.alumno);
@@ -60,6 +62,7 @@ var existeAlumno = function(data, res) {
   });
 }
 
+// Método para obtener los nombres de todas las empresas en la base de datos
 var obtenerEmpresas = function(res) {
   db.all('SELECT name FROM sqlite_master WHERE type = "table" AND name != "sqlite_sequence"',
     function(err, row) {
@@ -71,6 +74,7 @@ var obtenerEmpresas = function(res) {
     });
 }
 
+// Método para obtener el número de calificaciones y la calificación promedia de una empresa
 var obtenerDatosRanking = function(empresa) {
   return new Promise(function(resolve, reject) {
     db.all('SELECT COUNT(id) AS numCalificaciones, AVG(calificacion) AS calificacionProm FROM ' + empresa,
@@ -80,11 +84,12 @@ var obtenerDatosRanking = function(empresa) {
   });
 };
 
+// Método para insertar una empresa en la base de datos
 Empresa.crearEmpresa = function(data, res) {
   existeEmpresa(data, function(error, valExisteEmpresa) {
     if (valExisteEmpresa == false) {
-      var stmt = db.prepare('CREATE TABLE ' + data.empresa + ' (id INTEGER PRIMARY KEY AUTOINCREMENT, alumno TEXT, ' +
-        'calificacion INTEGER)');
+      var stmt = db.prepare('CREATE TABLE ' + data.empresa + ' (id INTEGER PRIMARY KEY AUTOINCREMENT, ' +
+        'alumno TEXT, calificacion INTEGER)');
       stmt.get(function(error, row) {
         if (error) {
           throw err;
@@ -95,13 +100,15 @@ Empresa.crearEmpresa = function(data, res) {
         }
       });
     } else {
-      var msg = 'No se ha creado la empresa. Ya existe una empresa con el nombre ' + data.empresa + ' en la base de datos.';
+      var msg = 'No se ha creado la empresa. Ya existe una empresa con el nombre ' + data.empresa +
+        ' en la base de datos.';
       console.log(msg);
       res(null, msg);
     }
   });
 }
 
+// Método para listar todas las calificaciones de una empresa en la base de datos
 Empresa.listarCalificaciones = function(data, res) {
   existeEmpresa(data, function(error, valExisteEmpresa) {
     if (valExisteEmpresa == true) {
@@ -121,6 +128,7 @@ Empresa.listarCalificaciones = function(data, res) {
   });
 }
 
+// Método para crear calificaciones para una empresa en la base de datos
 Empresa.crearCalificacion = function(data, res) {
   existeEmpresa(data, function(error, valExisteEmpresa) {
     if (valExisteEmpresa == true) {
@@ -153,6 +161,7 @@ Empresa.crearCalificacion = function(data, res) {
   });
 }
 
+// Método para borrar calificaciones de una empresa en la base de datos
 Empresa.borrarCalificacion = function(data, res) {
   existeEmpresa(data, function(error, valExisteEmpresa) {
     if (valExisteEmpresa == true) {
@@ -185,6 +194,7 @@ Empresa.borrarCalificacion = function(data, res) {
   });
 }
 
+// Método para actualizar calificaciones de una empresa en la base de datos
 Empresa.actualizarCalificacion = function(data, res) {
   existeEmpresa(data, function(error, valExisteEmpresa) {
     if (valExisteEmpresa == true) {
@@ -217,6 +227,7 @@ Empresa.actualizarCalificacion = function(data, res) {
   });
 }
 
+// Método para generar el ranking ordenador según calificación promedia de todas las empresas en la base de datos
 Empresa.generarRanking = function(res) {
   var empresas = [];
   var ranking = [];

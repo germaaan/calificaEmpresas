@@ -22,17 +22,19 @@
 // Dependencias
 var empresa = require('../models/empresa');
 
+// Función para procesar el nombre que se va a pasar a la librería
 var procesaNombre = function(cadena) {
   cadena = cadena.replace(':', '');
   cadena = cadena.toUpperCase();
   return cadena;
 }
 
-//Pagina de inicio
+// Pagina de inicio
 exports.index = function(req, res) {
   res.render('index', {});
 };
 
+// Enlace para crear empresas
 exports.crearEmpresa = function(req, res) {
   empresa.crearEmpresa({
     empresa: procesaNombre(req.params.empresa)
@@ -43,6 +45,7 @@ exports.crearEmpresa = function(req, res) {
   });
 };
 
+// Enlace para listas calificaciones
 exports.listarCalificaciones = function(req, res) {
   var nombreEmpresa = procesaNombre(req.params.empresa);
 
@@ -56,6 +59,7 @@ exports.listarCalificaciones = function(req, res) {
   });
 };
 
+// Enlace para crear calificaciones
 exports.crearCalificacion = function(req, res) {
   empresa.crearCalificacion({
     empresa: procesaNombre(req.params.empresa),
@@ -68,6 +72,7 @@ exports.crearCalificacion = function(req, res) {
   });
 };
 
+// Enlace para borrar calificaciones
 exports.borrarCalificacion = function(req, res) {
   empresa.borrarCalificacion({
     empresa: procesaNombre(req.params.empresa),
@@ -79,6 +84,7 @@ exports.borrarCalificacion = function(req, res) {
   });
 };
 
+// Enlace para actualizar calificaciones
 exports.actualizarCalificacion = function(req, res) {
   empresa.actualizarCalificacion({
     empresa: procesaNombre(req.params.empresa),
@@ -91,6 +97,7 @@ exports.actualizarCalificacion = function(req, res) {
   });
 };
 
+// Enlace para generar ranking de empresas
 exports.generarRanking = function(req, res) {
   empresa.generarRanking(function(error, data) {
     res.render('index', {
