@@ -39,6 +39,26 @@ var existeAlumno = function(data, res) {
   });
 }
 
+var obtenerEmpresas = function(res) {
+  db.all('SELECT name FROM sqlite_master WHERE type = "table" AND name != "sqlite_sequence"',
+    function(err, row) {
+      if (err) {
+        throw err;
+      } else {
+        res(null, row);
+      }
+    });
+}
+
+var obtenerDatosRanking = function(empresa) {
+  return new Promise(function(resolve, reject) {
+    db.all('SELECT COUNT(id) AS numCalificaciones, AVG(calificacion) AS calificacionProm FROM ' + empresa,
+      function(err, row) {
+        resolve(row);
+      });
+  });
+};
+
 Empresa.crearEmpresa = function(data, res) {
   existeEmpresa(data, function(error, valExisteEmpresa) {
     if (valExisteEmpresa == false) {
@@ -175,26 +195,6 @@ Empresa.actualizarCalificacion = function(data, res) {
     }
   });
 }
-
-var obtenerEmpresas = function(res) {
-  db.all('SELECT name FROM sqlite_master WHERE type = "table" AND name != "sqlite_sequence"',
-    function(err, row) {
-      if (err) {
-        throw err;
-      } else {
-        res(null, row);
-      }
-    });
-}
-
-var obtenerDatosRanking = function(empresa) {
-  return new Promise(function(resolve, reject) {
-    db.all('SELECT COUNT(id) AS numCalificaciones, AVG(calificacion) AS calificacionProm FROM ' + empresa,
-      function(err, row) {
-        resolve(row);
-      });
-  });
-};
 
 Empresa.generarRanking = function(res) {
   var empresas = [];
