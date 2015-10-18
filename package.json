@@ -1,12 +1,38 @@
 {
-  "name": "application-name",
-  "version": "0.0.1",
+  "name": "califica-empresas",
+  "version": "0.1.0",
+  "author": "Germán Martínez Maldonado",
+  "description": "Aplicación de ejemplo para los ejercicios del tema 1 de Cloud Computing del Máster Universitario en Ingeniería Informática",
+  "keywords": [
+    "cloud computing"
+  ],
+  "bugs": {
+    "url": "https://github.com/germaaan/calificaEmpresas/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/germaaan/calificaEmpresas.git"
+  },
+  "license": "GNU General Public License v3.0",
+  "homepage": "https://github.com/germaaan/clases-CC-2015-16/tree/master/ejercicios/germaaan/tema_01/",
+  "main": "app.js",
+  "os": [
+    "linux"
+  ],
   "private": true,
+  "directories": {
+    "test": "test"
+  },
   "dependencies": {
     "bluebird": "^2.10.2",
     "express": "^3.21.2",
     "jade": "^1.11.0",
     "sqlite3": "^3.1.0",
     "underscore": "^1.8.3"
+  },
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "engines": {
+    "node": ">=0.11"
   }
 }
