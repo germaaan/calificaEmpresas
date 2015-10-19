@@ -1,3 +1,5 @@
+#!/usr/bin/env nodejs
+
 'use strict';
 
 module.exports = function(grunt) {
@@ -7,7 +9,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     docco: {
       debug: {
-        src: ['*.js', 'models/*.js'],
+        src: ['*.js', 'lib/*.js'],
         options: {
           output: 'docs/'
         }

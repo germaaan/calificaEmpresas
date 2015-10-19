@@ -1,3 +1,5 @@
+#!/usr/bin/env nodejs
+
 /*
 	CalificaEmpresas. Aplicación de ejemplo para los ejercicios del tema 1 de
   Cloud Computing del Máster Universitario en Ingeniería Informática.

@@ -1,3 +1,5 @@
+#!/usr/bin/env nodejs
+
 /*
 	CalificaEmpresas. Aplicación de ejemplo para los ejercicios del tema 1 de
   Cloud Computing del Máster Universitario en Ingeniería Informática.
@@ -20,7 +22,7 @@
 */
 
 // Dependencias
-var empresa = require('../models/empresa');
+var empresa = require(__dirname + '/../lib/empresa');
 
 // Función para procesar el nombre que se va a pasar a la librería
 var procesaNombre = function(cadena) {
