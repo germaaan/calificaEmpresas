@@ -30,6 +30,9 @@
     "lib": "lib",
     "test": "test"
   },
+  "scripts": {
+    "test": "mocha"
+  },
   "dependencies": {
     "bluebird": "^2.10.2",
     "express": "^3.21.2",
@@ -40,8 +43,8 @@
   "devDependencies": {
     "docco": "^0.7.0",
     "grunt-docco": "^0.4.0",
-    "should": "^7.1.0",
-    "supertest": "^1.1.0"
+    "mocha": "^2.3.3",
+    "should": "^7.1.0"
   },
   "optionalDependencies": {},
   "engines": {

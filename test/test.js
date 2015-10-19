@@ -21,34 +21,40 @@
 	along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
+'use strict';
+
 var empresa = require('../lib/empresa');
 var _ = require("underscore");
 var assert = require("assert");
 var should = require("should");
 
-// Comprueba que existe el archivo de base datos
-// Siempre es verdadero porque este se crea justo al importar la librería
-assert.equal(empresa.existeBaseDatos(), true);
+describe('Tests', function() {
+  it('Existe base de datos', function(done) {
+    assert.equal(empresa.existeBaseDatos(), true);
+    done();
+  });
 
-// Comprueba si una empresa llamada "prueba" es creada
-// Siempre es verdadero porque si no existe la crea y si existe no hace nada
-empresa.crearEmpresa({
-  empresa: "prueba"
-}, function(error, data) {
-  empresa.existeEmpresa({
-    empresa: "prueba"
-  }, function(error, data) {
-    assert.equal(data, true);
+  it('Creación de empresas', function(done) {
+    empresa.crearEmpresa({
+      empresa: "prueba"
+    }, function(error, data) {
+      empresa.existeEmpresa({
+        empresa: "prueba"
+      }, function(error, data) {
+        assert.equal(data, true);
+      });
+    });
+    done();
+  });
+
+  it('Generación de ranking:', function(done) {
+    empresa.generarRanking(function(error, data) {
+      _.each(data, function(valor) {
+        valor.should.have.property("empresa");
+        valor.should.have.property("numCalificaciones");
+        valor.should.have.property("calificacionProm");
+      });
+    });
+    done();
   });
 });
-
-// Comprueba si el ranking es generado
-empresa.generarRanking(function(error, data) {
-  _.each(data, function(valor) {
-    valor.should.have.property("empresa");
-    valor.should.have.property("numCalificaciones");
-    valor.should.have.property("calificacionProm");
-  });
-});
-
-console.log("Aserciones pasadas con éxito.")
