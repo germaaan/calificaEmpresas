@@ -1,5 +1,6 @@
 # Directorio instalación módulos
 node_modules
+coverage
 
 # Archivo de base de datos
 calificaciones.db

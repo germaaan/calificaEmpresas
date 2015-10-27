@@ -31,7 +31,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "dependencies": {
     "bluebird": "^2.10.2",
@@ -41,13 +41,16 @@
     "underscore": "^1.8.3"
   },
   "devDependencies": {
+    "coveralls": "^2.11.4",
     "docco": "^0.7.0",
     "grunt-docco": "^0.4.0",
+    "istanbul": "^0.4.0",
     "mocha": "^2.3.3",
+    "mocha-lcov-reporter": "^1.0.0",
     "should": "^7.1.0"
   },
   "optionalDependencies": {},
   "engines": {
-    "node": ">=0.11"
+    "node": ">=0.11.16"
   }
 }
