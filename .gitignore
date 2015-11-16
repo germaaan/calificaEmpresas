@@ -1,6 +1,11 @@
 # Directorio instalación módulos
 node_modules
+
+# Directorio con resultados de cobertura
 coverage
+
+# Directorio con documentación
+doc
 
 # Archivo de base de datos
 calificaciones.db
