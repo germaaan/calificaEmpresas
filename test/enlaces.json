@@ -1,0 +1,22 @@
+[{
+  "nombre": "Inicio",
+  "ruta": "/"
+}, {
+  "nombre": "Crear empresas",
+  "ruta": "/crearEmpresa/:EMPRESA"
+}, {
+  "nombre": "Listar calificaciones",
+  "ruta": "/listarCalificaciones/:EMPRESA"
+}, {
+  "nombre": "Crear calificación",
+  "ruta": "/crearCalificacion/:EMPRESA/:ALUMNO/:100"
+}, {
+  "nombre": "Actualizar calificación",
+  "ruta": "/actualizarCalificacion/:EMPRESA/:ALUMNO/:0"
+}, {
+  "nombre": "Borrar calificación",
+  "ruta": "/borrarCalificacion/:EMPRESA/:ALUMNO"
+}, {
+  "nombre": "Generar ranking",
+  "ruta": "/generarRanking"
+}]

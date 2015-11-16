@@ -21,14 +21,33 @@
 	along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-'use strict';
 
-var empresa = require('../lib/empresa');
+// Dependencias
 var _ = require("underscore");
 var assert = require("assert");
+var request = require("supertest");
 var should = require("should");
 
-describe('Tests', function() {
+// Módulos de la aplicación
+var app = require('../app.js');
+var empresa = require('../lib/empresa');
+
+// Método para parsear archivos JSON a objetos JS
+var cargar = function(archivo) {
+  var config = null;
+
+  try {
+    config = JSON.parse(fs.readFileSync(archivo));
+  } catch (e) {
+    console.log("Error: no existe el archivo " + archivo);
+  }
+
+  return config;
+};
+
+var enlaces = cargar(__dirname + "/../test/enlaces.json");
+
+describe('Tests básicos', function() {
   it('Existe base de datos', function(done) {
     assert.equal(empresa.existeBaseDatos(), true);
     done();
@@ -47,7 +66,7 @@ describe('Tests', function() {
     done();
   });
 
-  it('Generación de ranking:', function(done) {
+  it('Generación de ranking', function(done) {
     empresa.generarRanking(function(error, data) {
       _.each(data, function(valor) {
         valor.should.have.property("empresa");
@@ -56,5 +75,33 @@ describe('Tests', function() {
       });
     });
     done();
+  });
+});
+
+// Prueba de acceso a la página
+describe('Prueba de acceso', function() {
+  _.each(enlaces, function(valor) {
+    it(valor.nombre, function(done) {
+      request(app)
+        .get(valor.ruta)
+        .expect(200)
+        .end(function(err, res) {
+          if (err) {
+            throw err;
+          }
+          done();
+        });
+    });
+  });
+  it("Página de error", function(done) {
+    request(app)
+      .get("/foo")
+      .expect(404)
+      .end(function(err, res) {
+        if (err) {
+          throw err;
+        }
+        done();
+      });
   });
 });

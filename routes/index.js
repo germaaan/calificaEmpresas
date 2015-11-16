@@ -29,7 +29,7 @@ var procesaNombre = function(cadena) {
   cadena = cadena.replace(':', '');
   cadena = cadena.toUpperCase();
   return cadena;
-}
+};
 
 // Pagina de inicio
 exports.index = function(req, res) {
