@@ -32,21 +32,6 @@ var should = require("should");
 var app = require('../app.js');
 var empresa = require('../lib/empresa');
 
-// Método para parsear archivos JSON a objetos JS
-var cargar = function(archivo) {
-  var config = null;
-
-  try {
-    config = JSON.parse(fs.readFileSync(archivo));
-  } catch (e) {
-    console.log("Error: no existe el archivo " + archivo);
-  }
-
-  return config;
-};
-
-var enlaces = cargar(__dirname + "/../test/enlaces.json");
-
 describe('Tests básicos', function() {
   it('Existe base de datos', function(done) {
     assert.equal(empresa.existeBaseDatos(), true);
