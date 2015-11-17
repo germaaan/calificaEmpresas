@@ -80,18 +80,46 @@ describe('Tests básicos', function() {
 
 // Prueba de acceso a la página
 describe('Prueba de acceso', function() {
-  _.each(enlaces, function(valor) {
-    it(valor.nombre, function(done) {
-      request(app)
-        .get(valor.ruta)
-        .expect(200)
-        .end(function(err, res) {
-          if (err) {
-            throw err;
-          }
-          done();
-        });
-    });
+  it("Página principal", function(done) {
+    request(app)
+      .get("/")
+      .expect("Content-Type", /text\/html/)
+      .expect(200, done);
+  });
+  it("Crear empresa", function(done) {
+    request(app)
+      .get("/crearEmpresa/EMPRESA")
+      .expect("Content-Type", /text\/html/)
+      .expect(200, done);
+  });
+  it("Listar calificaciones empresa", function(done) {
+    request(app)
+      .get("/listarCalificaciones/EMPRESA")
+      .expect("Content-Type", /text\/html/)
+      .expect(200, done);
+  });
+  it("Crear calificación alumno empresa", function(done) {
+    request(app)
+      .get("/crearCalificacion/EMPRESA/ALUMNO/0")
+      .expect("Content-Type", /text\/html/)
+      .expect(200, done);
+  });
+  it("Actualizar calificación alumno empresa", function(done) {
+    request(app)
+      .get("/actualizarCalificacion/EMPRESA/ALUMNO/100")
+      .expect("Content-Type", /text\/html/)
+      .expect(200, done);
+  });
+  it("Borrar calificación alumno empresa", function(done) {
+    request(app)
+      .get("/borrarCalificacion/EMPRESA/ALUMNO")
+      .expect("Content-Type", /text\/html/)
+      .expect(200, done);
+  });
+  it("Generar ranking empresas", function(done) {
+    request(app)
+      .get("/generarRanking")
+      .expect(200, done);
   });
   it("Página de error", function(done) {
     request(app)
