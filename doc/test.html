@@ -85,34 +85,7 @@
             </div>
             
             <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> app = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../app.js'</span>);
-<span class="hljs-keyword">var</span> empresa = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../lib/empresa'</span>);</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-4">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-4">&#182;</a>
-              </div>
-              <p>Método para parsear archivos JSON a objetos JS</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> cargar = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">archivo</span>) </span>{
-  <span class="hljs-keyword">var</span> config = <span class="hljs-literal">null</span>;
-
-  <span class="hljs-keyword">try</span> {
-    config = <span class="hljs-built_in">JSON</span>.parse(fs.readFileSync(archivo));
-  } <span class="hljs-keyword">catch</span> (e) {
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Error: no existe el archivo "</span> + archivo);
-  }
-
-  <span class="hljs-keyword">return</span> config;
-};
-
-<span class="hljs-keyword">var</span> enlaces = cargar(__dirname + <span class="hljs-string">"/../test/enlaces.json"</span>);
+<span class="hljs-keyword">var</span> empresa = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../lib/empresa'</span>);
 
 describe(<span class="hljs-string">'Tests básicos'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
   it(<span class="hljs-string">'Existe base de datos'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">done</span>) </span>{
@@ -148,29 +121,57 @@ describe(<span class="hljs-string">'Tests básicos'</span>, <span class="hljs-fu
         </li>
         
         
-        <li id="section-5">
+        <li id="section-4">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-5">&#182;</a>
+                <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
               <p>Prueba de acceso a la página</p>
 
             </div>
             
             <div class="content"><div class='highlight'><pre>describe(<span class="hljs-string">'Prueba de acceso'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-  _.each(enlaces, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">valor</span>) </span>{
-    it(valor.nombre, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">done</span>) </span>{
-      request(app)
-        .get(valor.ruta)
-        .expect(<span class="hljs-number">200</span>)
-        .end(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, res</span>) </span>{
-          <span class="hljs-keyword">if</span> (err) {
-            <span class="hljs-keyword">throw</span> err;
-          }
-          done();
-        });
-    });
+  it(<span class="hljs-string">"Página principal"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">done</span>) </span>{
+    request(app)
+      .get(<span class="hljs-string">"/"</span>)
+      .expect(<span class="hljs-string">"Content-Type"</span>, <span class="hljs-regexp">/text\/html/</span>)
+      .expect(<span class="hljs-number">200</span>, done);
+  });
+  it(<span class="hljs-string">"Crear empresa"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">done</span>) </span>{
+    request(app)
+      .get(<span class="hljs-string">"/crearEmpresa/EMPRESA"</span>)
+      .expect(<span class="hljs-string">"Content-Type"</span>, <span class="hljs-regexp">/text\/html/</span>)
+      .expect(<span class="hljs-number">200</span>, done);
+  });
+  it(<span class="hljs-string">"Listar calificaciones empresa"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">done</span>) </span>{
+    request(app)
+      .get(<span class="hljs-string">"/listarCalificaciones/EMPRESA"</span>)
+      .expect(<span class="hljs-string">"Content-Type"</span>, <span class="hljs-regexp">/text\/html/</span>)
+      .expect(<span class="hljs-number">200</span>, done);
+  });
+  it(<span class="hljs-string">"Crear calificación alumno empresa"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">done</span>) </span>{
+    request(app)
+      .get(<span class="hljs-string">"/crearCalificacion/EMPRESA/ALUMNO/0"</span>)
+      .expect(<span class="hljs-string">"Content-Type"</span>, <span class="hljs-regexp">/text\/html/</span>)
+      .expect(<span class="hljs-number">200</span>, done);
+  });
+  it(<span class="hljs-string">"Actualizar calificación alumno empresa"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">done</span>) </span>{
+    request(app)
+      .get(<span class="hljs-string">"/actualizarCalificacion/EMPRESA/ALUMNO/100"</span>)
+      .expect(<span class="hljs-string">"Content-Type"</span>, <span class="hljs-regexp">/text\/html/</span>)
+      .expect(<span class="hljs-number">200</span>, done);
+  });
+  it(<span class="hljs-string">"Borrar calificación alumno empresa"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">done</span>) </span>{
+    request(app)
+      .get(<span class="hljs-string">"/borrarCalificacion/EMPRESA/ALUMNO"</span>)
+      .expect(<span class="hljs-string">"Content-Type"</span>, <span class="hljs-regexp">/text\/html/</span>)
+      .expect(<span class="hljs-number">200</span>, done);
+  });
+  it(<span class="hljs-string">"Generar ranking empresas"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">done</span>) </span>{
+    request(app)
+      .get(<span class="hljs-string">"/generarRanking"</span>)
+      .expect(<span class="hljs-number">200</span>, done);
   });
   it(<span class="hljs-string">"Página de error"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">done</span>) </span>{
     request(app)
