@@ -89,7 +89,9 @@ gulp.task('server', ['default'], function() {
       script: 'app',
       ext: 'js html',
       env: {
-        'NODE_ENV': 'development'
+        'NODE_ENV': 'development',
+        'PORT': 8000,
+        'IP': '127.0.0.1'
       }
     })
     .on('restart', function() {

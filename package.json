@@ -55,7 +55,6 @@
     "should": "^7.1.1",
     "supertest": "^1.1.0"
   },
-  "optionalDependencies": {},
   "engines": {
     "node": ">=0.12.7"
   }
