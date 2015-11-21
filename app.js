@@ -26,29 +26,26 @@ var express = require('express');
 
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
-var debug = require('debug')('Gesco-DatabaseManagement:server');
 var favicon = require('serve-favicon');
-var http = require('http');
 var logger = require('morgan');
 var path = require('path');
 global.appRoot = path.resolve(__dirname);
 
 // Rutas
-var index = require(__dirname + '/routes/index');
+var index = require(appRoot + '/routes/index');
 
 // Crea aplicación web con Express
 var app = express();
 
-// Variables de entorno (puerto de escucha y dirección IP)
+// Puerto de escucha de peticiones
 app.set('port', process.env.PORT);
-app.set('ip', process.env.IP);
 // Directorio con las plantillas
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(appRoot, 'views'));
 // Motor de visualización
 app.set('view engine', 'jade');
 
 // Favicon
-app.use(favicon(__dirname + '/public/images/favicon.ico'));
+app.use(favicon(appRoot + '/public/images/favicon.ico'));
 // Logger de solicitudes HTTP
 app.use(logger('dev'));
 // Parseadores
@@ -58,7 +55,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cookieParser());
 //Manejador de enrutado
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(appRoot, 'public')));
 
 // Funcionalidades
 app.get('/', index.index);
@@ -84,14 +81,8 @@ app.use(function(err, req, res, next) {
   });
 });
 
-// Creación del servidor
-var server = http.createServer(app);
-server.listen(app.get('port'));
-server.on('listening', onListening);
-
-// Escuchador de eventos de peticiones al servidor HTTP
-function onListening() {
-  debug('Servidor Express escuchando localmente en el puerto ' + server.address().port);
-}
+app.listen(app.get('port'), function() {
+  console.log('Aplicación escuchando peticiones en el puerto ' + app.get('port') + " ...");
+});
 
 module.exports = app;

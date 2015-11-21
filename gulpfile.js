@@ -26,6 +26,7 @@
 var gulp = require('gulp');
 
 var docco = require("gulp-docco");
+var env = require('gulp-env');
 var istanbul = require('gulp-istanbul');
 var jshint = require('gulp-jshint');
 var mocha = require('gulp-mocha');
@@ -101,8 +102,13 @@ gulp.task('dev', ['default'], function() {
 });
 
 gulp.task('setProduction', function() {
-  return process.env.NODE_ENV = 'production';
+  env({
+    vars: {
+      'NODE_ENV': 'production',
+      'PORT': 5000
+    }
+  });
 });
 
 // Ejecuta la aplicación en modo producción
-gulp.task('server', ['default', 'setProduction'], shell.task(['PORT=8000 IP=127.0.0.1 node app']));
+gulp.task('server', ['default', 'setProduction'], shell.task(['node app']));
