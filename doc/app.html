@@ -118,7 +118,8 @@ global.appRoot = path.resolve(__dirname);</pre></div></div>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>app.set(<span class="hljs-string">'port'</span>, process.env.PORT);</pre></div></div>
+            <div class="content"><div class='highlight'><pre>app.set(<span class="hljs-string">'ip'</span>, process.env.IP || <span class="hljs-string">'0.0.0.0'</span>);
+app.set(<span class="hljs-string">'port'</span>, process.env.PORT || <span class="hljs-number">5000</span>);</pre></div></div>
             
         </li>
         
@@ -274,8 +275,9 @@ app.get(<span class="hljs-string">'/generarRanking'</span>, index.generarRanking
   });
 });
 
-app.listen(app.get(<span class="hljs-string">'port'</span>), <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Aplicación escuchando peticiones en el puerto '</span> + app.get(<span class="hljs-string">'port'</span>) + <span class="hljs-string">" ..."</span>);
+app.listen(app.get(<span class="hljs-string">'port'</span>), app.get(<span class="hljs-string">'ip'</span>), <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Aplicación escuchando peticiones para la dirección '</span> + app.get(<span class="hljs-string">'ip'</span>) +
+    <span class="hljs-string">' en el puerto '</span> + app.get(<span class="hljs-string">'port'</span>) + <span class="hljs-string">" ..."</span>);
 });
 
 <span class="hljs-built_in">module</span>.exports = app;</pre></div></div>

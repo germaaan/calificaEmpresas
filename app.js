@@ -37,8 +37,9 @@ var index = require(appRoot + '/routes/index');
 // Crea aplicación web con Express
 var app = express();
 
-// Puerto de escucha de peticiones
-app.set('port', process.env.PORT);
+// Dirección IP y puerto de escucha de peticiones
+app.set('ip', process.env.IP || '0.0.0.0');
+app.set('port', process.env.PORT || 5000);
 // Directorio con las plantillas
 app.set('views', path.join(appRoot, 'views'));
 // Motor de visualización
@@ -81,8 +82,10 @@ app.use(function(err, req, res, next) {
   });
 });
 
-app.listen(app.get('port'), function() {
-  console.log('Aplicación escuchando peticiones en el puerto ' + app.get('port') + " ...");
+// Servidor escuchando dirección y puertos correspondientes
+app.listen(app.get('port'), app.get('ip'), function() {
+  console.log('Aplicación escuchando peticiones para la dirección ' + app.get('ip') +
+    ' en el puerto ' + app.get('port') + " ...");
 });
 
 module.exports = app;
