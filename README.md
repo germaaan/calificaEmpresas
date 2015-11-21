@@ -2,5 +2,8 @@
 
 [![Dependency Status](https://img.shields.io/david/germaaan/calificaEmpresas.svg?style=flat)](https://david-dm.org/germaaan/calificaEmpresas) [![devDependency Status](https://img.shields.io/david/dev/germaaan/calificaEmpresas.svg?style=flat)](https://david-dm.org/germaaan/calificaEmpresas#info=devDependencies) [![Coverage Status](https://img.shields.io/coveralls/germaaan/calificaEmpresas.svg?style=flat)](https://coveralls.io/r/germaaan/calificaEmpresas?branch=master)
 
+[![node](https://codeship.com/projects/96934c10-72bf-0133-fb9e-3abdc0aa443c/status?branch=master
+)](https://nodejs.org/en/)
+
 # Califica Empresas
 Aplicación de ejemplo para los ejercicios de la asignatura Cloud Computing del Máster Universitario en Ingeniería Informática ([https://goo.gl/MPNqPT](https://goo.gl/MPNqPT))
