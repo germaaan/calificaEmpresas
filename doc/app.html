@@ -114,7 +114,7 @@ global.appRoot = path.resolve(__dirname);</pre></div></div>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <p>Puerto de escucha de peticiones</p>
+              <p>Dirección IP y puerto de escucha de peticiones</p>
 
             </div>
             
@@ -273,9 +273,22 @@ app.get(<span class="hljs-string">'/generarRanking'</span>, index.generarRanking
     message: err.message,
     error: err
   });
-});
+});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-15">&#182;</a>
+              </div>
+              <p>Servidor escuchando dirección y puertos correspondientes</p>
 
-app.listen(app.get(<span class="hljs-string">'port'</span>), app.get(<span class="hljs-string">'ip'</span>), <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>app.listen(app.get(<span class="hljs-string">'port'</span>), app.get(<span class="hljs-string">'ip'</span>), <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
   <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Aplicación escuchando peticiones para la dirección '</span> + app.get(<span class="hljs-string">'ip'</span>) +
     <span class="hljs-string">' en el puerto '</span> + app.get(<span class="hljs-string">'port'</span>) + <span class="hljs-string">" ..."</span>);
 });

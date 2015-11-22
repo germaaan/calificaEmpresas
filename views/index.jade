@@ -27,35 +27,35 @@ head
 		$(document).ready(function() {
 			$('#crearEmpresa').click(function() {
 				if ($('#empresa').val()){
-					$('#crearEmpresa').attr('href', 'http://127.0.0.1:3000/crearEmpresa/:' + $('#empresa').val());
+					$('#crearEmpresa').attr('href', 'http://califiroku.herokuapp.com/crearEmpresa/:' + $('#empresa').val());
 				} else {
 					alert("No se puede crear una empresa sin introducir su nombre.");
 				}
 			});
 			$('#listarCalificaciones').click(function() {
 				if ($('#empresa').val()){
-					$('#listarCalificaciones').attr('href', 'http://127.0.0.1:3000/listarCalificaciones/:' + $('#empresa').val());
+					$('#listarCalificaciones').attr('href', 'http://califiroku.herokuapp.com/listarCalificaciones/:' + $('#empresa').val());
 				} else {
 					alert("No se pueden listar las calificaciones de una empresa sin introducir su nombre.");
 				}
 			});
 			$('#crearCalificacion').click(function() {
 				if ($('#empresa').val() && $('#alumno').val() && $('#calificacion').val()){
-					$('#crearCalificacion').attr('href', 'http://127.0.0.1:3000/crearCalificacion/:' + $('#empresa').val() + '/:' + $('#alumno').val() + '/:' + $('#calificacion').val());
+					$('#crearCalificacion').attr('href', 'http://califiroku.herokuapp.com/crearCalificacion/:' + $('#empresa').val() + '/:' + $('#alumno').val() + '/:' + $('#calificacion').val());
 				} else {
 					alert("No se puede crear una calificación sin introducir el nombre de la empresa, el nombre del alumno y el valor de la calificación.");
 				}
 			});
 			$('#borrarCalificacion').click(function() {
 				if ($('#empresa').val() && $('#alumno').val()){
-					$('#borrarCalificacion').attr('href', 'http://127.0.0.1:3000/borrarCalificacion/:' + $('#empresa').val() + '/:' + $('#alumno').val());
+					$('#borrarCalificacion').attr('href', 'http://califiroku.herokuapp.com/borrarCalificacion/:' + $('#empresa').val() + '/:' + $('#alumno').val());
 				} else {
 					alert("No se puede borrar una calificación sin introducir el nombre de la empresa y el nombre del alumno.");
 				}
 			});
 			$('#actualizarCalificacion').click(function() {
 				if ($('#empresa').val() && $('#alumno').val() && $('#calificacion').val()){
-					$('#actualizarCalificacion').attr('href', 'http://127.0.0.1:3000/actualizarCalificacion/:' + $('#empresa').val() + '/:' + $('#alumno').val() + '/:' + $('#calificacion').val());
+					$('#actualizarCalificacion').attr('href', 'http://califiroku.herokuapp.com/actualizarCalificacion/:' + $('#empresa').val() + '/:' + $('#alumno').val() + '/:' + $('#calificacion').val());
 				} else {
 					alert("No se puede actualizar una calificación sin introducir el nombre de la empresa, el nombre del alumno y el valor de la calificación.");
 				}
